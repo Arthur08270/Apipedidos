@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 
 @RestController 
 @RequestMapping("/api/pedidos")
-@NoArgsConstructor 
+@AllArgsConstructor 
 public class PedidosController {
     
     private final PedidosService pedidosService;
