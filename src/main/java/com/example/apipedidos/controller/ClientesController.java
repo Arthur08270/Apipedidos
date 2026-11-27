@@ -1,5 +1,6 @@
 package com.example.apipedidos.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,7 +30,7 @@ public class ClientesController {
     @PostMapping 
     public ResponseEntity<Clientes> criarCliente(@RequestBody @Valid Clientes clientes){
         Clientes novoCliente = clientesService.criarCliente();
-        return ResponseEntity.status(HttpStatusCode.CREATED).body(novoCliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
     }
 
     @GetMapping 
