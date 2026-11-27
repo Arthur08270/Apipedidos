@@ -19,40 +19,38 @@ import com.example.apipedidos.service.PedidosService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
-@RestController 
+@RestController
 @RequestMapping("/api/pedidos")
-@AllArgsConstructor 
+@AllArgsConstructor
 public class PedidosController {
-    
+
     private final PedidosService pedidosService;
 
     @PostMapping 
     public ResponseEntity<Pedidos> criarPedido(@RequestBody @Valid Pedidos pedidos){
-        Pedidos novoPedido = pedidosService.criarPedidos(pedidos);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoPedido);
+        Pedidos novoPedido = pedidosService.criarPedido();
+        return ResponseEntity.status(HttpStatusCode.CREATED).body(novoPedido);
     }
 
-    @GetMapping 
-    public ResponseEntity<List<Pedidos>> listarPedidos(){
+    @GetMapping
+    public ResponseEntity<List<Pedidos>> listarPedidos() {
         return ResponseEntity.ok(pedidosService.listarPedidos());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Pedidos> buscarPedidoPorId(@PathVariable Long id){
-        return ResponseEntity.ok(pedidosService.buscarPedidosPorId(id));
+        return ResponseEntity.ok(pedidosService.buscarPedidoPorId(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Pedidos> atualizarPedido(@RequestBody @Valid Pedidos pedidos, @PathVariable Long id){
-        Pedidos pedidoAtualizado = pedidosService.atualizarPedidos(pedidos, id);
+    public ResponseEntity<Pedidos> atualizarPedido(@RequestBody @Valid Pedidos, @PathVariable Long id){
+        Pedidos pedidoAtualizado = pedidosService.atualizarPedido(Pedidos, id);
         return ResponseEntity.ok().body(pedidoAtualizado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarPedido(@PathVariable Long id){
-        pedidosService.deletarPedidos(id);
+        pedidosService.deletarPedido(id);
         return ResponseEntity.ok().build();
     }
-
-
 }

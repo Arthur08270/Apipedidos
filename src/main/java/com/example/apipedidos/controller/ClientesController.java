@@ -19,40 +19,38 @@ import com.example.apipedidos.service.ClientesService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
-@RestController 
+@RestController
 @RequestMapping("/api/clientes")
-@AllArgsConstructor 
+@AllArgsConstructor
 public class ClientesController {
-    
-    private final ClientesService clientesService;
 
+    private final ClientesService clientesService;
 
     @PostMapping 
     public ResponseEntity<Clientes> criarCliente(@RequestBody @Valid Clientes clientes){
-        Clientes novoCliente = clientesService.criarCliente(clientes);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
+        Clientes novoCliente = clientesService.criarCliente();
+        return ResponseEntity.status(HttpStatusCode.CREATED).body(novoCliente);
     }
 
-    @GetMapping 
-    public ResponseEntity<List<Clientes>> listarClientes(){
+    @GetMapping
+    public ResponseEntity<List<Clientes>> listarClientes() {
         return ResponseEntity.ok(clientesService.listarClientes());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Clientes> buscarClientePorId(@PathVariable Long id){
+    public ResponseEntity<Clientes> buscarClientePorId(@PathVariable Long id) {
         return ResponseEntity.ok(clientesService.buscarClientePorId(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Clientes> atualizarCliente(@RequestBody @Valid Clientes clientes, @PathVariable Long id){
+    public ResponseEntity<Clientes> atualizarCliente(@RequestBody @Valid Clientes clientes, @PathVariable Long id) {
         Clientes clienteAtualizado = clientesService.atualizarCliente(clientes, id);
         return ResponseEntity.ok().body(clienteAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarCliente(@PathVariable Long id){
+    public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
         clientesService.deletarCliente(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
-
 }
