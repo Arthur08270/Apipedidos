@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.apipedidos.models.Pedidos;
 import com.example.apipedidos.service.PedidosService;
 import com.example.apipedidos.models.*;
 
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
 
 @RestController 
 @RequestMapping("/api/pedidos")
-@NoArgsConstructor 
+@AllArgsConstructor 
 public class PedidosController {
     
     private final PedidosService pedidosService;

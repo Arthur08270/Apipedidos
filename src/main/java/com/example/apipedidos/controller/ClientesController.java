@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.apipedidos.models.Clientes;
 import com.example.apipedidos.service.ClientesService;
 import com.example.apipedidos.models.*;
 
