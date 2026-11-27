@@ -28,7 +28,10 @@ public class PedidosService {
     public Pedidos atualizarPedidos(Pedidos pedidos, Long id){
         Pedidos pedidosAtualizado = buscarPedidosPorId(id);
 
-        pedidosAtualizado.set
+        pedidosAtualizado.setNomeProduto(pedidos.getNomeProduto());
+        pedidosAtualizado.setIdentificador(pedidos.getIdentificador());
+        pedidosAtualizado.setQuantidade(pedidos.getQuantidade());
+        pedidosAtualizado.setValorProduto(pedidos.getValorProduto());
         
         return pedidosRepository.save(pedidosAtualizado);
     }
