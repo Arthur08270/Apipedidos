@@ -1,6 +1,8 @@
+package com.example.apipedidos.controller;
+
 import java.util.List;
 
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.apipedidos.models.Pedidos;
 import com.example.apipedidos.service.PedidosService;
-import com.example.apipedidos.models.*;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 @RestController 
 @RequestMapping("/api/pedidos")
@@ -28,8 +28,8 @@ public class PedidosController {
 
     @PostMapping 
     public ResponseEntity<Pedidos> criarPedido(@RequestBody @Valid Pedidos pedidos){
-        Pedidos novoPedido = pedidosService.criarPedido();
-        return ResponseEntity.status(HttpStatusCode.CREATED).body(novoPedido);
+        Pedidos novoPedido = pedidosService.criarPedidos(pedidos);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoPedido);
     }
 
     @GetMapping 
@@ -39,18 +39,18 @@ public class PedidosController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Pedidos> buscarPedidoPorId(@PathVariable Long id){
-        return ResponseEntity.ok(pedidosService.buscarPedidoPorId(id));
+        return ResponseEntity.ok(pedidosService.buscarPedidosPorId(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Pedidos> atualizarPedido(@RequestBody @Valid Pedidos, @PathVariable Long id){
-        Pedidos pedidoAtualizado = pedidosService.atualizarPedido(Pedidos, id);
+    public ResponseEntity<Pedidos> atualizarPedido(@RequestBody @Valid Pedidos pedidos, @PathVariable Long id){
+        Pedidos pedidoAtualizado = pedidosService.atualizarPedidos(pedidos, id);
         return ResponseEntity.ok().body(pedidoAtualizado);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarPedido(@PathVariable Long id){
-        pedidosService.deletarPedido(id);
+        pedidosService.deletarPedidos(id);
         return ResponseEntity.ok().build();
     }
 

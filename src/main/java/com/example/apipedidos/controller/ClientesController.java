@@ -1,6 +1,8 @@
 package com.example.apipedidos.controller;
 
-import org.springframework.http.HttpStatusCode;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.apipedidos.models.Clientes;
 import com.example.apipedidos.service.ClientesService;
-import com.example.apipedidos.models.*;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 @RestController 
 @RequestMapping("/api/clientes")
@@ -30,7 +30,7 @@ public class ClientesController {
     @PostMapping 
     public ResponseEntity<Clientes> criarCliente(@RequestBody @Valid Clientes clientes){
         Clientes novoCliente = clientesService.criarCliente(clientes);
-        return ResponseEntity.status(HttpStatusCode.CREATED).body(novoCliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
     }
 
     @GetMapping 
