@@ -26,10 +26,10 @@ public class ClientesController {
 
     private final ClientesService clientesService;
 
-    @PostMapping 
-    public ResponseEntity<Clientes> criarCliente(@RequestBody @Valid Clientes clientes){
-        Clientes novoCliente = clientesService.criarCliente();
-        return ResponseEntity.status(HttpStatusCode.CREATED).body(novoCliente);
+    @PostMapping
+    public ResponseEntity<Clientes> criarCliente(@RequestBody @Valid Clientes clientes) {
+        Clientes novoCliente = clientesService.criarCliente(clientes);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoCliente);
     }
 
     @GetMapping

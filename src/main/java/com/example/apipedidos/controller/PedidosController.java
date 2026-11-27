@@ -26,10 +26,10 @@ public class PedidosController {
 
     private final PedidosService pedidosService;
 
-    @PostMapping 
-    public ResponseEntity<Pedidos> criarPedido(@RequestBody @Valid Pedidos pedidos){
-        Pedidos novoPedido = pedidosService.criarPedido();
-        return ResponseEntity.status(HttpStatusCode.CREATED).body(novoPedido);
+    @PostMapping
+    public ResponseEntity<Pedidos> criarPedido(@RequestBody @Valid Pedidos pedidos) {
+        Pedidos novoPedido = pedidosService.criarPedido(pedidos);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoPedido);
     }
 
     @GetMapping
@@ -38,19 +38,19 @@ public class PedidosController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pedidos> buscarPedidoPorId(@PathVariable Long id){
+    public ResponseEntity<Pedidos> buscarPedidoPorId(@PathVariable Long id) {
         return ResponseEntity.ok(pedidosService.buscarPedidoPorId(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Pedidos> atualizarPedido(@RequestBody @Valid Pedidos, @PathVariable Long id){
-        Pedidos pedidoAtualizado = pedidosService.atualizarPedido(Pedidos, id);
+    public ResponseEntity<Pedidos> atualizarPedido(@RequestBody @Valid Pedidos pedidos, @PathVariable Long id) {
+        Pedidos pedidoAtualizado = pedidosService.atualizarPedido(pedidos, id);
         return ResponseEntity.ok().body(pedidoAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarPedido(@PathVariable Long id){
+    public ResponseEntity<Void> deletarPedido(@PathVariable Long id) {
         pedidosService.deletarPedido(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }
