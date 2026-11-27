@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.apipedidos.service.ClientesService;
+import com.example.apipedidos.models.*;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class ClientesController {
 
     @PostMapping 
     public ResponseEntity<Clientes> criarCliente(@RequestBody @Valid Clientes clientes){
-        Clientes novoCliente = clientesService.criarCliente();
+        Clientes novoCliente = clientesService.criarCliente(clientes);
         return ResponseEntity.status(HttpStatusCode.CREATED).body(novoCliente);
     }
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.apipedidos.service.PedidosService;
+import com.example.apipedidos.models.*;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
