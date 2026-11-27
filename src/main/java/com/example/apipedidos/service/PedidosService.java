@@ -2,43 +2,41 @@ package com.example.apipedidos.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.apipedidos.models.Pedidos;
 import com.example.apipedidos.repository.PedidosRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor 
+@Service
+@AllArgsConstructor
 public class PedidosService {
-    
+
     private final PedidosRepository pedidosRepository;
 
-
-    public Pedidos criarPedidos(Pedidos pedidos){
+    public Pedidos criarPedido(Pedidos pedidos) {
         return pedidosRepository.save(pedidos);
     }
 
-    public List<Pedidos> listarPedidos(){
+    public List<Pedidos> listarPedidos() {
         return pedidosRepository.findAll();
     }
 
-    public Pedidos buscarPedidosPorId(Long id){
-        return pedidosRepository.findById(id).orElseThrow(() -> new RuntimeException("Pedido não encontrado!"));
+    public Pedidos buscarPedidoPorId(Long id) {
+        return pedidosRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Pedido não encontrado com id: " + id));
     }
 
-    public Pedidos atualizarPedidos(Pedidos pedidos, Long id){
-        Pedidos pedidosAtualizado = buscarPedidosPorId(id);
-
-        pedidosAtualizado.setNomeProduto(pedidos.getNomeProduto());
-        pedidosAtualizado.setIdentificador(pedidos.getIdentificador());
-        pedidosAtualizado.setQuantidade(pedidos.getQuantidade());
-        pedidosAtualizado.setValorProduto(pedidos.getValorProduto());
-        
+    public Pedidos atualizarPedido(Pedidos pedidosAtualizado, Long id) {
+        Pedidos pedidoExistente = buscarPedidoPorId(id);
+        pedidosAtualizado.setId(pedidoExistente.getId());
         return pedidosRepository.save(pedidosAtualizado);
     }
 
-    public void deletarPedidos(Long id){
-        Pedidos pedidos = buscarPedidosPorId(id);
-        pedidosRepository.delete(pedidos);
+    public void deletarPedido(Long id) {
+        Pedidos pedidoExistente = buscarPedidoPorId(id);
+        pedidosRepository.delete(pedidoExistente);
     }
-
 }
